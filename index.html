@@ -13,14 +13,15 @@
     <style>
         /* إضافة خط عصري من Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
         body {
-            font-family: 'Poppins', sans-serif; /* خط أسطوري */
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e1e2f, #2a4066, #6b48ff, #ff589e, #ffcc00); /* تدرج خلفية ديناميكي */
+            background: linear-gradient(135deg, #1e1e2f, #2a4066, #6b48ff, #ff589e, #ffcc00);
             background-size: 200% 200%;
-            animation: gradientBG 15s ease infinite; /* تحريك الخلفية */
+            animation: gradientBG 15s ease infinite;
             direction: rtl;
         }
 
@@ -30,59 +31,8 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* تنسيق قائمة الهامبرغر */
-        .hamburger-menu {
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 250px;
-            background: rgba(255, 255, 255, 0.95);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            z-index: 2000;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .hamburger-menu.active {
-            transform: translateX(0);
-        }
-
-        .hamburger-btn {
-            font-size: 24px;
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 10px;
-        }
-
-        .menu-list {
-            list-style: none;
-            padding: 20px;
-            margin: 0;
-        }
-
-        .menu-list li {
-            margin: 20px 0;
-        }
-
-        .menu-list button {
-            background: none;
-            border: none;
-            color: #6b48ff;
-            font-size: 18px;
-            cursor: pointer;
-            width: 100%;
-            text-align: right;
-        }
-
-        .menu-list button:hover {
-            color: #ff589e;
-        }
-
         header {
-            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00, #00ddeb); /* تدرج نيون أسطوري */
+            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00, #00ddeb);
             color: #fff;
             padding: 20px 30px;
             display: flex;
@@ -112,53 +62,113 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* تنسيق صفحة الإعدادات والملف الشخصي */
-        .settings-page, .profile-page {
+        /* Hamburger Menu */
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(107, 72, 255, 0.3);
+            padding: 20px;
+            z-index: 1001;
+            width: 200px;
+        }
+
+        .menu.active {
+            display: block;
+        }
+
+        .menu button {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            color: #6b48ff;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu button:hover {
+            color: #ff589e;
+            background: rgba(107, 72, 255, 0.1);
+        }
+
+        /* Settings Modal */
+        .settings-modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1002;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .settings-modal.active {
+            display: flex;
+        }
+
+        .settings-content {
             background: rgba(255, 255, 255, 0.95);
-            z-index: 1500;
-            padding: 50px;
-            display: none;
-            overflow-y: auto;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: right;
         }
 
-        .settings-page.active, .profile-page.active {
-            display: block;
-        }
-
-        .settings-page h2, .profile-page h2 {
-            color: #6b48ff;
-            margin-bottom: 30px;
-        }
-
-        .settings-option {
-            margin: 20px 0;
-        }
-
-        .settings-option label {
-            display: block;
-            margin-bottom: 10px;
+        .settings-content h2 {
             color: #1a1a1a;
-        }
-
-        .settings-option select, .settings-option input {
-            width: 200px;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            background: rgba(245, 245, 245, 0.9);
-        }
-
-        .profile-page img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
             margin-bottom: 20px;
-            object-fit: cover;
+        }
+
+        .settings-content label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #6b48ff;
+        }
+
+        .settings-content select, .settings-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(245, 245, 245, 0.9);
+            font-size: 16px;
+        }
+
+        .settings-content button {
+            background: linear-gradient(45deg, #6b48ff, #ff589e);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         .post-form {
@@ -198,7 +208,7 @@
         }
 
         .post-form button {
-            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00); /* تدرج نيون */
+            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00);
             color: #fff;
             border: none;
             padding: 15px 40px;
@@ -228,8 +238,6 @@
             box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3), 0 0 60px rgba(255, 88, 158, 0.2);
             margin-bottom: 30px;
             transition: all 0.4s ease;
-            position: relative;
-            padding-top: 60px;
         }
 
         .post:hover {
@@ -238,24 +246,22 @@
         }
 
         .post-header {
-            position: absolute;
-            top: 10px;
-            right: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .post-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            margin-left: 10px;
             object-fit: cover;
         }
 
-        .post-username {
+        .post-user {
             font-weight: 600;
-            color: #6b48ff;
+            color: #1a1a1a;
         }
 
         .post p {
@@ -274,7 +280,7 @@
 
         .post-actions {
             margin-top: 25px;
-            display:-Language flex;
+            display: flex;
             gap: 30px;
             align-items: center;
         }
@@ -282,15 +288,15 @@
         .post-actions button {
             background: none;
             border: none;
-            color: #6b48ff; /* لون أساسي نيون */
+            color: #6b48ff;
             cursor: pointer;
-            font-size: 24px; /* حجم أيقونات أكبر */
+            font-size: 24px;
             padding: 8px;
             transition: all 0.3s ease;
         }
 
         .post-actions button:hover {
-            color: #ff589e; /* لون وردي نيون */
+            color: #ff589e;
             transform: scale(1.3) rotate(5deg);
             text-shadow: 0 0 10px rgba(255, 88, 158, 0.8);
         }
@@ -331,12 +337,13 @@
             font-size: 16px;
             color: #1a1a1a;
             margin: 12px 0;
-            padding: 12px 60px 12px 20px;
+            padding: 12px 20px;
             background: rgba(245, 245, 245, 0.9);
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
-            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .comment:hover {
@@ -347,10 +354,8 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+            margin-left: 10px;
+            object-fit: cover;
         }
 
         .notification {
@@ -466,52 +471,6 @@
     </style>
 </head>
 <body>
-    <!-- قائمة الهامبرغر -->
-    <div class="hamburger-menu" id="hamburgerMenu">
-        <ul class="menu-list">
-            <li><button onclick="logout()">تسجيل الخروج</button></li>
-            <li><button onclick="deleteAccount()">حذف الحساب</button></li>
-            <li><button onclick="showSettings()">الإعدادات</button></li>
-            <li><button onclick="showProfile()">الملف الشخصي</button></li>
-        </ul>
-    </div>
-
-    <!-- صفحة الإعدادات -->
-    <div class="settings-page" id="settingsPage">
-        <h2>الإعدادات</h2>
-        <div class="settings-option">
-            <label>حجم الخط</label>
-            <select id="fontSize" onchange="updateFontSettings()">
-                <option value="16">عادي (16px)</option>
-                <option value="18">كبير (18px)</option>
-                <option value="20">كبير جدًا (20px)</option>
-            </select>
-        </div>
-        <div class="settings-option">
-            <label>نوع الخط</label>
-            <select id="fontFamily" onchange="updateFontSettings()">
-                <option value="'Poppins', sans-serif">Poppins</option>
-                <option value="Arial, sans-serif">Arial</option>
-                <option value="'Cairo', sans-serif">Cairo</option>
-            </select>
-        </div>
-        <div class="settings-option">
-            <label>لون الخلفية</label>
-            <input type="color" id="bgColor" onchange="updateBackground()">
-        </div>
-        <button onclick="document.getElementById('settingsPage').classList.remove('active')">إغلاق</button>
-    </div>
-
-    <!-- صفحة الملف الشخصي -->
-    <div class="profile-page" id="profilePage">
-        <h2>الملف الشخصي</h2>
-        <img id="profilePic" src="default-avatar.png" alt="الصورة الشخصية">
-        <input type="file" id="profilePicInput" accept="image/*" onchange="updateProfilePic()">
-        <input type="text" id="profileName" placeholder="اسمك">
-        <button onclick="saveProfile()">حفظ التغييرات</button>
-        <button onclick="document.getElementById('profilePage').classList.remove('active')">إغلاق</button>
-    </div>
-
     <!-- صفحة تسجيل الدخول والاشتراك -->
     <div class="auth-container" id="authContainer">
         <h1>مرحبًا بك في Tamec</h1>
@@ -535,13 +494,37 @@
 
     <!-- الشريط العلوي -->
     <header id="mainHeader" style="display: none;">
-        <button class="hamburger-btn" onclick="toggleHamburgerMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
         <h1>Tamec</h1>
         <div class="user" id="userName">مرحبًا، [اسمك]</div>
-        <button onclick="logout()" class="logout-btn">تسجيل الخروج</button>
+        <div class="menu" id="hamburgerMenu">
+            <button onclick="logout()">تسجيل الخروج</button>
+            <button onclick="openSettings()">الإعدادات</button>
+        </div>
     </header>
+
+    <!-- نموذج الإعدادات -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <h2>الإعدادات</h2>
+            <label>نوع الخط</label>
+            <select id="fontFamily" onchange="changeFont()">
+                <option value="Poppins">Poppins</option>
+                <option value="Cairo">Cairo</option>
+            </select>
+            <label>حجم الخط</label>
+            <select id="fontSize" onchange="changeFontSize()">
+                <option value="16px">16px</option>
+                <option value="18px">18px</option>
+                <option value="20px">20px</option>
+            </select>
+            <label>تغيير الاسم</label>
+            <input type="text" id="profileName" placeholder="اسمك الجديد">
+            <label>تغيير الصورة</label>
+            <input type="file" id="profilePicture" accept="image/*">
+            <button onclick="saveProfile()">حفظ التغييرات</button>
+        </div>
+    </div>
 
     <!-- نموذج إضافة منشور -->
     <div class="post-form" id="postForm" style="display: none;">
@@ -566,66 +549,6 @@
 
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-        let currentUser = null;
-
-        // دوال قائمة الهامبرغر
-        function toggleHamburgerMenu() {
-            const menu = document.getElementById('hamburgerMenu');
-            menu.classList.toggle('active');
-        }
-
-        function showSettings() {
-            document.getElementById('settingsPage').classList.add('active');
-            toggleHamburgerMenu();
-        }
-
-        function showProfile() {
-            document.getElementById('profilePage').classList.add('active');
-            const user = auth.currentUser;
-            document.getElementById('profileName').value = user.displayName || '';
-            document.getElementById('profilePic').src = user.photoURL || 'default-avatar.png';
-            toggleHamburgerMenu();
-        }
-
-        function updateFontSettings() {
-            const fontSize = document.getElementById('fontSize').value;
-            const fontFamily = document.getElementById('fontFamily').value;
-            document.body.style.fontSize = `${fontSize}px`;
-            document.body.style.fontFamily = fontFamily;
-        }
-
-        function updateBackground() {
-            const color = document.getElementById('bgColor').value;
-            document.body.style.background = color;
-        }
-
-        function updateProfilePic() {
-            const file = document.getElementById('profilePicInput').files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('profilePic').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function saveProfile() {
-            const name = document.getElementById('profileName').value.trim();
-            const photoURL = document.getElementById('profilePic').src;
-            const user = auth.currentUser;
-            if (name) {
-                user.updateProfile({ 
-                    displayName: name,
-                    photoURL: photoURL 
-                }).then(() => {
-                    document.getElementById('userName').textContent = `مرحبًا، ${name}`;
-                    document.getElementById('profilePage').classList.remove('active');
-                    showNotification('تم تحديث الملف الشخصي');
-                    loadPosts(); // تحديث المنشورات لتعكس التغييرات
-                }).catch((error) => alert('خطأ: ' + error.message));
-            }
-        }
 
         // دالة تسجيل الدخول
         function login() {
@@ -633,8 +556,8 @@
             const password = document.getElementById('loginPassword').value;
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    currentUser = userCredential.user;
-                    showMainContent(currentUser, currentUser.displayName || currentUser.email.split('@')[0]);
+                    const user = userCredential.user;
+                    showMainContent(user, user.displayName || user.email.split('@')[0]);
                 })
                 .catch((error) => {
                     alert('خطأ في تسجيل الدخول: ' + error.message);
@@ -655,13 +578,13 @@
 
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    currentUser = userCredential.user;
-                    return currentUser.updateProfile({
-                        displayName: name
+                    const user = userCredential.user;
+                    return user.updateProfile({
+                        displayName: name,
+                        photoURL: 'https://via.placeholder.com/40' // صورة افتراضية
+                    }).then(() => {
+                        showMainContent(user, name);
                     });
-                })
-                .then(() => {
-                    showMainContent(currentUser, name);
                 })
                 .catch((error) => {
                     alert('خطأ في إنشاء الحساب: ' + error.message);
@@ -672,28 +595,14 @@
         function logout() {
             auth.signOut()
                 .then(() => {
-                    currentUser = null;
                     document.getElementById('authContainer').style.display = 'flex';
                     document.getElementById('mainHeader').style.display = 'none';
                     document.getElementById('postForm').style.display = 'none';
                     document.getElementById('postsContainer').style.display = 'none';
-                    toggleHamburgerMenu();
                 })
                 .catch((error) => {
                     alert('خطأ: ' + error.message);
                 });
-        }
-
-        // دالة حذف الحساب
-        function deleteAccount() {
-            if (confirm('هل أنت متأكد من حذف حسابك؟')) {
-                auth.currentUser.delete()
-                    .then(() => {
-                        logout();
-                        showNotification('تم حذف الحساب');
-                    })
-                    .catch((error) => alert('خطأ: ' + error.message));
-            }
         }
 
         // عرض/إخفاء نموذج التسجيل أو تسجيل الدخول
@@ -717,10 +626,9 @@
             loadPosts();
         }
 
-        // التحقق من حالة المستخدم عند تحميل الصفحة
+        // التحقق من حالة المستخدم
         auth.onAuthStateChanged((user) => {
             if (user) {
-                currentUser = user;
                 showMainContent(user, user.displayName || user.email.split('@')[0]);
             } else {
                 document.getElementById('authContainer').style.display = 'flex';
@@ -730,7 +638,7 @@
             }
         });
 
-        // تحميل المنشورات عند بدء الصفحة
+        // تحميل المنشورات
         document.addEventListener('DOMContentLoaded', () => {
             if (auth.currentUser) loadPosts();
         });
@@ -749,17 +657,19 @@
             const postDiv = document.createElement('div');
             postDiv.classList.add('post');
 
-            // رأس المنشور (الاسم والصورة)
-            const header = document.createElement('div');
-            header.classList.add('post-header');
+            const postHeader = document.createElement('div');
+            postHeader.classList.add('post-header');
+
             const avatar = document.createElement('img');
             avatar.classList.add('post-avatar');
-            avatar.src = post.userPic || 'default-avatar.png';
-            const username = document.createElement('span');
-            username.classList.add('post-username');
-            username.textContent = post.userName || 'مستخدم';
-            header.appendChild(avatar);
-            header.appendChild(username);
+            avatar.src = post.userPhoto || 'https://via.placeholder.com/40';
+
+            const userName = document.createElement('span');
+            userName.classList.add('post-user');
+            userName.textContent = post.userName || 'مستخدم';
+
+            postHeader.appendChild(avatar);
+            postHeader.appendChild(userName);
 
             const postContent = document.createElement('p');
             postContent.textContent = post.text;
@@ -795,9 +705,9 @@
                     time: new Date().toLocaleString('ar-EG'),
                     likes: 0,
                     comments: [],
-                    userId: currentUser.uid,
-                    userName: currentUser.displayName,
-                    userPic: currentUser.photoURL || 'default-avatar.png'
+                    userId: auth.currentUser.uid,
+                    userName: auth.currentUser.displayName,
+                    userPhoto: auth.currentUser.photoURL
                 };
                 const postsContainer = document.getElementById('postsContainer');
                 const newPostDiv = createPostElement(sharedPost);
@@ -810,35 +720,42 @@
 
             const editButton = document.createElement('button');
             editButton.innerHTML = '<i class="fas fa-edit"></i>';
+            editButton.style.display = post.userId === auth.currentUser.uid ? 'inline' : 'none';
+            editButton.onclick = () => {
+                const newText = prompt('عدّل المنشور:', post.text);
+                if (newText && newText.trim()) {
+                    post.text = newText.trim();
+                    postContent.textContent = post.text;
+                    updateLocalStorage();
+                    showNotification('تم تعديل المنشور');
+                }
+            };
+
             const deleteButton = document.createElement('button');
             deleteButton.innerHTML = '<i class="far fa-trash-alt"></i>';
+            deleteButton.style.display = post.userId === auth.currentUser.uid ? 'inline' : 'none';
+            deleteButton.onclick = () => {
+                if (confirm('هل تريد حذف هذا المنشور؟')) {
+                    postDiv.remove();
+                    updateLocalStorage();
+                    showNotification('تم حذف المنشور');
+                }
+            };
 
-            // التحقق من صاحب المنشور للسماح بالتعديل أو الحذف
-            if (post.userId === currentUser?.uid) {
-                editButton.onclick = () => {
-                    const newText = prompt('عدّل المنشور:', post.text);
-                    if (newText && newText.trim()) {
-                        post.text = newText.trim();
-                        postContent.textContent = post.text;
-                        updateLocalStorage();
-                        showNotification('تم تعديل المنشور');
-                    }
-                };
-                deleteButton.onclick = () => {
-                    if (confirm('هل تريد حذف هذا المنشور؟')) {
-                        postDiv.remove();
-                        updateLocalStorage();
-                        showNotification('تم حذف المنشور');
-                    }
-                };
-                actionsDiv.appendChild(editButton);
-                actionsDiv.appendChild(deleteButton);
-            }
+            // ميزات إضافية مثل Facebook/Instagram
+            const saveButton = document.createElement('button');
+            saveButton.innerHTML = '<i class="far fa-bookmark"></i>';
+            saveButton.onclick = () => {
+                showNotification('تم حفظ المنشور');
+            };
 
             actionsDiv.appendChild(likeButton);
             actionsDiv.appendChild(likesCount);
             actionsDiv.appendChild(commentButton);
             actionsDiv.appendChild(shareButton);
+            actionsDiv.appendChild(editButton);
+            actionsDiv.appendChild(deleteButton);
+            actionsDiv.appendChild(saveButton);
 
             const commentSection = document.createElement('div');
             commentSection.classList.add('comment-section');
@@ -851,35 +768,38 @@
             commentsList.classList.add('comments-list');
             if (post.comments) {
                 post.comments.forEach(comment => {
-                    const commentP = document.createElement('p');
-                    commentP.classList.add('comment');
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
                     const commentAvatar = document.createElement('img');
                     commentAvatar.classList.add('comment-avatar');
-                    commentAvatar.src = comment.userPic || 'default-avatar.png';
-                    commentP.textContent = `${comment.userName}: ${comment.text}`;
-                    commentP.appendChild(commentAvatar);
-                    commentsList.appendChild(commentP);
+                    commentAvatar.src = comment.userPhoto || 'https://via.placeholder.com/30';
+                    const commentText = document.createElement('span');
+                    commentText.textContent = `${comment.userName}: ${comment.text}`;
+                    commentDiv.appendChild(commentAvatar);
+                    commentDiv.appendChild(commentText);
+                    commentsList.appendChild(commentDiv);
                 });
             }
 
             commentInput.onkeypress = (e) => {
                 if (e.key === 'Enter' && commentInput.value.trim()) {
                     const commentText = commentInput.value.trim();
-                    const comment = {
-                        text: commentText,
-                        userName: currentUser.displayName,
-                        userPic: currentUser.photoURL || document.getElementById('profilePic').src
-                    };
-                    const commentP = document.createElement('p');
-                    commentP.classList.add('comment');
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
                     const commentAvatar = document.createElement('img');
                     commentAvatar.classList.add('comment-avatar');
-                    commentAvatar.src = comment.userPic;
-                    commentP.textContent = `${comment.userName}: ${comment.text}`;
-                    commentP.appendChild(commentAvatar);
-                    commentsList.appendChild(commentP);
+                    commentAvatar.src = auth.currentUser.photoURL || 'https://via.placeholder.com/30';
+                    const commentTextSpan = document.createElement('span');
+                    commentTextSpan.textContent = `${auth.currentUser.displayName}: ${commentText}`;
+                    commentDiv.appendChild(commentAvatar);
+                    commentDiv.appendChild(commentTextSpan);
+                    commentsList.appendChild(commentDiv);
                     post.comments = post.comments || [];
-                    post.comments.push(comment);
+                    post.comments.push({
+                        text: commentText,
+                        userName: auth.currentUser.displayName,
+                        userPhoto: auth.currentUser.photoURL
+                    });
                     commentInput.value = '';
                     updateLocalStorage();
                     showNotification('تم إضافة تعليق');
@@ -889,7 +809,7 @@
             commentSection.appendChild(commentInput);
             commentSection.appendChild(commentsList);
 
-            postDiv.appendChild(header);
+            postDiv.appendChild(postHeader);
             postDiv.appendChild(postContent);
             postDiv.appendChild(postTime);
             postDiv.appendChild(actionsDiv);
@@ -912,9 +832,9 @@
                 time: new Date().toLocaleString('ar-EG'),
                 likes: 0,
                 comments: [],
-                userId: currentUser.uid,
-                userName: currentUser.displayName,
-                userPic: currentUser.photoURL || document.getElementById('profilePic').src
+                userId: auth.currentUser.uid,
+                userName: auth.currentUser.displayName,
+                userPhoto: auth.currentUser.photoURL
             };
 
             const postsContainer = document.getElementById('postsContainer');
@@ -935,21 +855,15 @@
                 const text = postDiv.querySelector('p').textContent;
                 const time = postDiv.querySelector('.time').textContent;
                 const likes = parseInt(postDiv.querySelector('.likes-count').textContent.match(/\d+/)?.[0] || 0);
-                const comments = Array.from(postDiv.querySelectorAll('.comment')).map(c => {
-                    const [userName, text] = c.textContent.split(': ');
-                    return {
-                        userName,
-                        text,
-                        userPic: c.querySelector('.comment-avatar').src
-                    };
-                });
-                const userName = postDiv.querySelector('.post-username').textContent;
-                const userPic = postDiv.querySelector('.post-avatar').src;
-                posts.push({
-                    text, time, likes, comments,
-                    userId: currentUser.uid,
-                    userName, userPic
-                });
+                const comments = Array.from(postDiv.querySelectorAll('.comment')).map(c => ({
+                    text: c.querySelector('span').textContent.split(': ')[1],
+                    userName: c.querySelector('span').textContent.split(': ')[0],
+                    userPhoto: c.querySelector('img').src
+                }));
+                const userName = postDiv.querySelector('.post-user').textContent;
+                const userPhoto = postDiv.querySelector('.post-avatar').src;
+                const userId = auth.currentUser.uid;
+                posts.push({ text, time, likes, comments, userId, userName, userPhoto });
             });
             localStorage.setItem('posts', JSON.stringify(posts));
         }
@@ -973,6 +887,71 @@
                 e.preventDefault();
                 addPost();
             }
+        });
+
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('hamburgerMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Settings Modal
+        function openSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.classList.add('active');
+            document.getElementById('profileName').value = auth.currentUser.displayName || '';
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+
+        function changeFont() {
+            const font = document.getElementById('fontFamily').value;
+            document.body.style.fontFamily = font;
+        }
+
+        function changeFontSize() {
+            const size = document.getElementById('fontSize').value;
+            document.querySelectorAll('.post p, .comment, .post-form textarea').forEach(el => {
+                el.style.fontSize = size;
+            });
+        }
+
+        function saveProfile() {
+            const newName = document.getElementById('profileName').value.trim();
+            const fileInput = document.getElementById('profilePicture');
+            const user = auth.currentUser;
+
+            if (newName) {
+                user.updateProfile({
+                    displayName: newName
+                }).then(() => {
+                    document.getElementById('userName').textContent = `مرحبًا، ${newName}`;
+                    showNotification('تم تحديث الاسم');
+                    loadPosts(); // إعادة تحميل المنشورات لتحديث الاسم
+                });
+            }
+
+            if (fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    user.updateProfile({
+                        photoURL: e.target.result
+                    }).then(() => {
+                        showNotification('تم تحديث الصورة');
+                        loadPosts(); // إعادة تحميل المنشورات لتحديث الصورة
+                    });
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+
+            closeSettings();
+        }
+
+        // إغلاق نافذة الإعدادات عند النقر خارجها
+        document.getElementById('settingsModal').addEventListener('click', function (e) {
+            if (e.target === this) closeSettings();
         });
     </script>
 </body>
