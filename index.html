@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamec</title>
+    <!-- إضافة Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- إضافة Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
 
     <style>
+        /* إضافة خط عصري من Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif; /* خط أسطوري */
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e1e2f, #2a4066, #6b48ff, #ff589e, #ffcc00);
+            background: linear-gradient(135deg, #1e1e2f, #2a4066, #6b48ff, #ff589e, #ffcc00); /* تدرج خلفية ديناميكي */
             background-size: 200% 200%;
-            animation: gradientBG 15s ease infinite;
+            animation: gradientBG 15s ease infinite; /* تحريك الخلفية */
             direction: rtl;
         }
 
@@ -79,7 +82,7 @@
         }
 
         header {
-            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00, #00ddeb);
+            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00, #00ddeb); /* تدرج نيون أسطوري */
             color: #fff;
             padding: 20px 30px;
             display: flex;
@@ -109,7 +112,7 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* تنسيق صفحة الإعدادات */
+        /* تنسيق صفحة الإعدادات والملف الشخصي */
         .settings-page, .profile-page {
             position: fixed;
             top: 0;
@@ -158,22 +161,80 @@
             object-fit: cover;
         }
 
-        /* تنسيق المنشورات */
         .post-form {
             margin-top: 100px;
             padding: 30px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3), 0 0 60px rgba(255, 88, 158, 0.2);
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
+        .post-form:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(107, 72, 255, 0.5), 0 0 80px rgba(255, 88, 158, 0.3);
+        }
+
+        .post-form textarea {
+            width: 100%;
+            height: 140px;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            resize: none;
+            font-size: 18px;
+            background: rgba(245, 245, 245, 0.9);
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .post-form textarea:focus {
+            background: #fff;
+            box-shadow: inset 0 4px 12px rgba(107, 72, 255, 0.2), 0 0 20px rgba(255, 88, 158, 0.3);
+            outline: none;
+        }
+
+        .post-form button {
+            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00); /* تدرج نيون */
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 35px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(107, 72, 255, 0.6);
+        }
+
+        .post-form button:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 0 25px rgba(255, 88, 158, 0.8), 0 0 40px rgba(255, 204, 0, 0.6);
+        }
+
+        .posts {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
         .post {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3), 0 0 60px rgba(255, 88, 158, 0.2);
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
             position: relative;
             padding-top: 60px;
+        }
+
+        .post:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(107, 72, 255, 0.5), 0 0 80px rgba(255, 88, 158, 0.3);
         }
 
         .post-header {
@@ -197,9 +258,89 @@
             color: #6b48ff;
         }
 
+        .post p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .post .time {
+            color: #bbb;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .post-actions {
+            margin-top: 25px;
+            display:-Language flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .post-actions button {
+            background: none;
+            border: none;
+            color: #6b48ff; /* لون أساسي نيون */
+            cursor: pointer;
+            font-size: 24px; /* حجم أيقونات أكبر */
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .post-actions button:hover {
+            color: #ff589e; /* لون وردي نيون */
+            transform: scale(1.3) rotate(5deg);
+            text-shadow: 0 0 10px rgba(255, 88, 158, 0.8);
+        }
+
+        .likes-count {
+            color: #888;
+            font-size: 16px;
+            padding: 5px 0;
+            font-weight: 600;
+        }
+
+        .comment-section {
+            margin-top: 25px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            background: rgba(245, 245, 245, 0.9);
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .comment-input:focus {
+            background: #fff;
+            box-shadow: inset 0 4px 12px rgba(107, 72, 255, 0.2), 0 0 20px rgba(255, 88, 158, 0.3);
+            outline: none;
+        }
+
+        .comments-list {
+            margin-top: 20px;
+        }
+
         .comment {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin: 12px 0;
+            padding: 12px 60px 12px 20px;
+            background: rgba(245, 245, 245, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
             position: relative;
-            padding-right: 60px;
+        }
+
+        .comment:hover {
+            transform: translateX(5px);
         }
 
         .comment-avatar {
@@ -207,16 +348,125 @@
             height: 30px;
             border-radius: 50%;
             position: absolute;
-            right: 10px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        /* بقية التنسيقات كما هي */
-        /* [تم حذف بعض التنسيقات للاختصار، لكنها موجودة في الكود الأصلي] */
+        .notification {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00);
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 40px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 8px 30px rgba(107, 72, 255, 0.6), 0 0 50px rgba(255, 88, 158, 0.4);
+            font-size: 18px;
+            font-weight: 600;
+            animation: fadeIn 0.4s ease, pulse 1.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 8px 30px rgba(107, 72, 255, 0.6), 0 0 50px rgba(255, 88, 158, 0.4); }
+            50% { box-shadow: 0 8px 40px rgba(107, 72, 255, 0.8), 0 0 70px rgba(255, 88, 158, 0.6); }
+            100% { box-shadow: 0 8px 30px rgba(107, 72, 255, 0.6), 0 0 50px rgba(255, 88, 158, 0.4); }
+        }
+
+        .auth-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .auth-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-box h2 {
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .auth-box input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background: rgba(245, 245, 245, 0.9);
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+
+        .auth-box button {
+            background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 35px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+
+        .auth-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 88, 158, 0.8);
+        }
+
+        .auth-box p {
+            margin-top: 20px;
+            color: #888;
+        }
+
+        .auth-box a {
+            color: #6b48ff;
+            text-decoration: none;
+        }
+
+        .auth-box a:hover {
+            color: #ff589e;
+        }
+
+        .logout-btn {
+            background: linear-gradient(45deg, #ff589e, #ffcc00);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.4s ease;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 88, 158, 0.8);
+        }
     </style>
 </head>
 <body>
+    <!-- قائمة الهامبرغر -->
     <div class="hamburger-menu" id="hamburgerMenu">
         <ul class="menu-list">
             <li><button onclick="logout()">تسجيل الخروج</button></li>
@@ -226,6 +476,7 @@
         </ul>
     </div>
 
+    <!-- صفحة الإعدادات -->
     <div class="settings-page" id="settingsPage">
         <h2>الإعدادات</h2>
         <div class="settings-option">
@@ -248,16 +499,20 @@
             <label>لون الخلفية</label>
             <input type="color" id="bgColor" onchange="updateBackground()">
         </div>
+        <button onclick="document.getElementById('settingsPage').classList.remove('active')">إغلاق</button>
     </div>
 
+    <!-- صفحة الملف الشخصي -->
     <div class="profile-page" id="profilePage">
         <h2>الملف الشخصي</h2>
         <img id="profilePic" src="default-avatar.png" alt="الصورة الشخصية">
         <input type="file" id="profilePicInput" accept="image/*" onchange="updateProfilePic()">
         <input type="text" id="profileName" placeholder="اسمك">
         <button onclick="saveProfile()">حفظ التغييرات</button>
+        <button onclick="document.getElementById('profilePage').classList.remove('active')">إغلاق</button>
     </div>
 
+    <!-- صفحة تسجيل الدخول والاشتراك -->
     <div class="auth-container" id="authContainer">
         <h1>مرحبًا بك في Tamec</h1>
         <div class="auth-box" id="loginBox">
@@ -278,22 +533,27 @@
         </div>
     </div>
 
+    <!-- الشريط العلوي -->
     <header id="mainHeader" style="display: none;">
         <button class="hamburger-btn" onclick="toggleHamburgerMenu()">
             <i class="fas fa-bars"></i>
         </button>
         <h1>Tamec</h1>
         <div class="user" id="userName">مرحبًا، [اسمك]</div>
+        <button onclick="logout()" class="logout-btn">تسجيل الخروج</button>
     </header>
 
+    <!-- نموذج إضافة منشور -->
     <div class="post-form" id="postForm" style="display: none;">
         <textarea id="postInput" placeholder="ما الذي تفكر فيه؟"></textarea>
         <button onclick="addPost()">نشر</button>
     </div>
 
+    <!-- منطقة المنشورات -->
     <div id="postsContainer" class="posts" style="display: none;"></div>
 
     <script>
+        // تهيئة Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBfXJ-2tmCYo-pQjfN_4nAdxC-NcqfjAlo",
             authDomain: "tamec-8f9ea.firebaseapp.com",
@@ -306,9 +566,9 @@
 
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-
         let currentUser = null;
 
+        // دوال قائمة الهامبرغر
         function toggleHamburgerMenu() {
             const menu = document.getElementById('hamburgerMenu');
             menu.classList.toggle('active');
@@ -323,6 +583,7 @@
             document.getElementById('profilePage').classList.add('active');
             const user = auth.currentUser;
             document.getElementById('profileName').value = user.displayName || '';
+            document.getElementById('profilePic').src = user.photoURL || 'default-avatar.png';
             toggleHamburgerMenu();
         }
 
@@ -351,16 +612,22 @@
 
         function saveProfile() {
             const name = document.getElementById('profileName').value.trim();
+            const photoURL = document.getElementById('profilePic').src;
             const user = auth.currentUser;
             if (name) {
-                user.updateProfile({ displayName: name }).then(() => {
+                user.updateProfile({ 
+                    displayName: name,
+                    photoURL: photoURL 
+                }).then(() => {
                     document.getElementById('userName').textContent = `مرحبًا، ${name}`;
                     document.getElementById('profilePage').classList.remove('active');
                     showNotification('تم تحديث الملف الشخصي');
-                });
+                    loadPosts(); // تحديث المنشورات لتعكس التغييرات
+                }).catch((error) => alert('خطأ: ' + error.message));
             }
         }
 
+        // دالة تسجيل الدخول
         function login() {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
@@ -369,45 +636,78 @@
                     currentUser = userCredential.user;
                     showMainContent(currentUser, currentUser.displayName || currentUser.email.split('@')[0]);
                 })
-                .catch((error) => alert('خطأ في تسجيل الدخول: ' + error.message));
+                .catch((error) => {
+                    alert('خطأ في تسجيل الدخول: ' + error.message);
+                });
         }
 
+        // دالة إنشاء حساب
         function signup() {
             const name = document.getElementById('signupName').value.trim();
+            const birthdate = document.getElementById('signupBirthdate').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
+
+            if (!name || !birthdate || !email || !password) {
+                alert('يرجى ملء جميع الحقول!');
+                return;
+            }
 
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     currentUser = userCredential.user;
-                    return currentUser.updateProfile({ displayName: name });
+                    return currentUser.updateProfile({
+                        displayName: name
+                    });
                 })
                 .then(() => {
                     showMainContent(currentUser, name);
                 })
-                .catch((error) => alert('خطأ في إنشاء الحساب: ' + error.message));
+                .catch((error) => {
+                    alert('خطأ في إنشاء الحساب: ' + error.message);
+                });
         }
 
+        // دالة تسجيل الخروج
         function logout() {
-            auth.signOut().then(() => {
-                currentUser = null;
-                document.getElementById('authContainer').style.display = 'flex';
-                document.getElementById('mainHeader').style.display = 'none';
-                document.getElementById('postForm').style.display = 'none';
-                document.getElementById('postsContainer').style.display = 'none';
-                toggleHamburgerMenu();
-            });
+            auth.signOut()
+                .then(() => {
+                    currentUser = null;
+                    document.getElementById('authContainer').style.display = 'flex';
+                    document.getElementById('mainHeader').style.display = 'none';
+                    document.getElementById('postForm').style.display = 'none';
+                    document.getElementById('postsContainer').style.display = 'none';
+                    toggleHamburgerMenu();
+                })
+                .catch((error) => {
+                    alert('خطأ: ' + error.message);
+                });
         }
 
+        // دالة حذف الحساب
         function deleteAccount() {
             if (confirm('هل أنت متأكد من حذف حسابك؟')) {
-                auth.currentUser.delete().then(() => {
-                    logout();
-                    showNotification('تم حذف الحساب');
-                }).catch((error) => alert('خطأ: ' + error.message));
+                auth.currentUser.delete()
+                    .then(() => {
+                        logout();
+                        showNotification('تم حذف الحساب');
+                    })
+                    .catch((error) => alert('خطأ: ' + error.message));
             }
         }
 
+        // عرض/إخفاء نموذج التسجيل أو تسجيل الدخول
+        function showSignup() {
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('signupBox').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('signupBox').style.display = 'none';
+            document.getElementById('loginBox').style.display = 'block';
+        }
+
+        // عرض المحتوى الرئيسي بعد تسجيل الدخول
         function showMainContent(user, displayName) {
             document.getElementById('authContainer').style.display = 'none';
             document.getElementById('mainHeader').style.display = 'flex';
@@ -417,17 +717,39 @@
             loadPosts();
         }
 
+        // التحقق من حالة المستخدم عند تحميل الصفحة
         auth.onAuthStateChanged((user) => {
             if (user) {
                 currentUser = user;
                 showMainContent(user, user.displayName || user.email.split('@')[0]);
+            } else {
+                document.getElementById('authContainer').style.display = 'flex';
+                document.getElementById('mainHeader').style.display = 'none';
+                document.getElementById('postForm').style.display = 'none';
+                document.getElementById('postsContainer').style.display = 'none';
             }
         });
+
+        // تحميل المنشورات عند بدء الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            if (auth.currentUser) loadPosts();
+        });
+
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+            const postsContainer = document.getElementById('postsContainer');
+            postsContainer.innerHTML = '';
+            posts.forEach(post => {
+                const postDiv = createPostElement(post);
+                postsContainer.appendChild(postDiv);
+            });
+        }
 
         function createPostElement(post) {
             const postDiv = document.createElement('div');
             postDiv.classList.add('post');
 
+            // رأس المنشور (الاسم والصورة)
             const header = document.createElement('div');
             header.classList.add('post-header');
             const avatar = document.createElement('img');
@@ -435,16 +757,16 @@
             avatar.src = post.userPic || 'default-avatar.png';
             const username = document.createElement('span');
             username.classList.add('post-username');
-            username.textContent = post.userName;
+            username.textContent = post.userName || 'مستخدم';
             header.appendChild(avatar);
             header.appendChild(username);
 
-            const content = document.createElement('p');
-            content.textContent = post.text;
+            const postContent = document.createElement('p');
+            postContent.textContent = post.text;
 
-            const time = document.createElement('div');
-            time.classList.add('time');
-            time.textContent = post.time;
+            const postTime = document.createElement('div');
+            postTime.classList.add('time');
+            postTime.textContent = post.time;
 
             const actionsDiv = document.createElement('div');
             actionsDiv.classList.add('post-actions');
@@ -459,6 +781,7 @@
                 likesCount.textContent = `(${post.likes})`;
                 likeButton.innerHTML = '<i class="fas fa-heart"></i>';
                 updateLocalStorage();
+                showNotification('تم الإعجاب بالمنشور');
             };
 
             const commentButton = document.createElement('button');
@@ -466,25 +789,46 @@
 
             const shareButton = document.createElement('button');
             shareButton.innerHTML = '<i class="far fa-paper-plane"></i>';
+            shareButton.onclick = () => {
+                const sharedPost = {
+                    text: `تمت المشاركة: ${post.text}`,
+                    time: new Date().toLocaleString('ar-EG'),
+                    likes: 0,
+                    comments: [],
+                    userId: currentUser.uid,
+                    userName: currentUser.displayName,
+                    userPic: currentUser.photoURL || 'default-avatar.png'
+                };
+                const postsContainer = document.getElementById('postsContainer');
+                const newPostDiv = createPostElement(sharedPost);
+                postsContainer.insertBefore(newPostDiv, postsContainer.firstChild);
+                const posts = JSON.parse(localStorage.getItem('posts')) || [];
+                posts.unshift(sharedPost);
+                localStorage.setItem('posts', JSON.stringify(posts));
+                showNotification('تمت مشاركة المنشور');
+            };
 
             const editButton = document.createElement('button');
             editButton.innerHTML = '<i class="fas fa-edit"></i>';
             const deleteButton = document.createElement('button');
             deleteButton.innerHTML = '<i class="far fa-trash-alt"></i>';
 
+            // التحقق من صاحب المنشور للسماح بالتعديل أو الحذف
             if (post.userId === currentUser?.uid) {
                 editButton.onclick = () => {
                     const newText = prompt('عدّل المنشور:', post.text);
                     if (newText && newText.trim()) {
                         post.text = newText.trim();
-                        content.textContent = post.text;
+                        postContent.textContent = post.text;
                         updateLocalStorage();
+                        showNotification('تم تعديل المنشور');
                     }
                 };
                 deleteButton.onclick = () => {
                     if (confirm('هل تريد حذف هذا المنشور؟')) {
                         postDiv.remove();
                         updateLocalStorage();
+                        showNotification('تم حذف المنشور');
                     }
                 };
                 actionsDiv.appendChild(editButton);
@@ -498,12 +842,13 @@
 
             const commentSection = document.createElement('div');
             commentSection.classList.add('comment-section');
+
             const commentInput = document.createElement('input');
             commentInput.classList.add('comment-input');
             commentInput.placeholder = 'اكتب تعليقًا...';
+
             const commentsList = document.createElement('div');
             commentsList.classList.add('comments-list');
-
             if (post.comments) {
                 post.comments.forEach(comment => {
                     const commentP = document.createElement('p');
@@ -519,10 +864,11 @@
 
             commentInput.onkeypress = (e) => {
                 if (e.key === 'Enter' && commentInput.value.trim()) {
+                    const commentText = commentInput.value.trim();
                     const comment = {
-                        text: commentInput.value.trim(),
+                        text: commentText,
                         userName: currentUser.displayName,
-                        userPic: document.getElementById('profilePic').src
+                        userPic: currentUser.photoURL || document.getElementById('profilePic').src
                     };
                     const commentP = document.createElement('p');
                     commentP.classList.add('comment');
@@ -536,6 +882,7 @@
                     post.comments.push(comment);
                     commentInput.value = '';
                     updateLocalStorage();
+                    showNotification('تم إضافة تعليق');
                 }
             };
 
@@ -543,8 +890,8 @@
             commentSection.appendChild(commentsList);
 
             postDiv.appendChild(header);
-            postDiv.appendChild(content);
-            postDiv.appendChild(time);
+            postDiv.appendChild(postContent);
+            postDiv.appendChild(postTime);
             postDiv.appendChild(actionsDiv);
             postDiv.appendChild(commentSection);
 
@@ -554,7 +901,11 @@
         function addPost() {
             const postInput = document.getElementById('postInput');
             const postText = postInput.value.trim();
-            if (!postText) return;
+
+            if (postText === '') {
+                alert('يرجى كتابة شيء للنشر!');
+                return;
+            }
 
             const post = {
                 text: postText,
@@ -563,7 +914,7 @@
                 comments: [],
                 userId: currentUser.uid,
                 userName: currentUser.displayName,
-                userPic: document.getElementById('profilePic').src
+                userPic: currentUser.photoURL || document.getElementById('profilePic').src
             };
 
             const postsContainer = document.getElementById('postsContainer');
@@ -576,13 +927,6 @@
 
             postInput.value = '';
             showNotification('تم نشر المنشور');
-        }
-
-        function loadPosts() {
-            const posts = JSON.parse(localStorage.getItem('posts')) || [];
-            const postsContainer = document.getElementById('postsContainer');
-            postsContainer.innerHTML = '';
-            posts.forEach(post => postsContainer.appendChild(createPostElement(post)));
         }
 
         function updateLocalStorage() {
@@ -619,8 +963,17 @@
             }
             notification.textContent = message;
             notification.style.display = 'block';
-            setTimeout(() => notification.style.display = 'none', 2000);
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
         }
+
+        document.getElementById('postInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addPost();
+            }
+        });
     </script>
 </body>
 </html>
