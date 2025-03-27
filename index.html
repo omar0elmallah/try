@@ -257,6 +257,11 @@
     .post-user {
       font-weight: 600;
       color: #1a1a1a;
+      cursor: pointer;
+    }
+    .post-user:hover {
+      color: #6b48ff;
+      text-decoration: underline;
     }
     .post p {
       margin: 0;
@@ -354,7 +359,7 @@
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .settings-modal, .profile-modal {
+    .settings-modal, .profile-modal, .user-profile-modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -366,15 +371,16 @@
       align-items: center;
       z-index: 1001;
     }
-    .settings-box, .profile-box {
+    .settings-box, .profile-box, .user-profile-box {
       background: rgba(255, 255, 255, 0.95);
       padding: 40px;
       border-radius: 20px;
       width: 100%;
-      max-width: 500px;
+      max-width: 800px;
       box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+      text-align: center;
     }
-    .settings-box h2, .profile-box h2 {
+    .settings-box h2, .profile-box h2, .user-profile-box h2 {
       color: #6b48ff;
       margin-bottom: 20px;
     }
@@ -386,12 +392,15 @@
       border-radius: 12px;
       background: rgba(245, 245, 245, 0.9);
     }
-    .profile-box img {
+    .profile-box img, .user-profile-box img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       margin: 20px auto;
       display: block;
+    }
+    .user-profile-posts {
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -463,6 +472,14 @@
       <input type="file" id="avatarInput" accept="image/*" onchange="previewAvatar()">
       <input type="text" id="profileName" placeholder="الاسم">
       <button onclick="updateProfile()">حفظ التغييرات</button>
+    </div>
+  </div>
+
+  <div class="user-profile-modal" id="userProfileModal">
+    <div class="user-profile-box">
+      <h2 id="userProfileName"></h2>
+      <img src="default-avatar.jpg" id="userProfileAvatar">
+      <div class="user-profile-posts" id="userProfilePosts"></div>
     </div>
   </div>
 
@@ -633,7 +650,7 @@
       const newName = document.getElementById('profileName').value.trim();
       const promises = [];
       
-      if (newName) {
+      if (newName && newName !== currentUser.displayName) {
         promises.push(currentUser.updateProfile({ displayName: newName }));
       }
       
@@ -646,23 +663,48 @@
         }));
       }
 
-      Promise.all(promises).then(() => {
-        if (newName) {
-          document.getElementById('userName').textContent = `مرحبًا، ${newName}`;
-        }
-        if (selectedAvatarFile) {
-          storage.ref(`avatars/${currentUser.uid}`).getDownloadURL().then(url => {
-            document.getElementById('headerAvatar').src = url;
-            document.getElementById('profileAvatar').src = url;
-          });
-        }
-        document.getElementById('profileModal').style.display = 'none';
-        showNotification('تم تحديث الملف الشخصي');
-        selectedAvatarFile = null;
-        loadPosts();
-      }).catch(error => {
-        showNotification('خطأ: ' + error.message);
+      Promise.all(promises)
+        .then(() => {
+          if (newName && newName !== currentUser.displayName) {
+            document.getElementById('userName').textContent = `مرحبًا، ${newName}`;
+            currentUser.displayName = newName; // Update local reference
+          }
+          if (selectedAvatarFile) {
+            storage.ref(`avatars/${currentUser.uid}`).getDownloadURL().then(url => {
+              document.getElementById('headerAvatar').src = url;
+              document.getElementById('profileAvatar').src = url;
+              currentUser.photoURL = url; // Update local reference
+            });
+          }
+          document.getElementById('profileModal').style.display = 'none';
+          showNotification('تم تحديث الملف الشخصي بنجاح');
+          selectedAvatarFile = null;
+          loadPosts(); // Refresh posts to reflect updated name/avatar
+        })
+        .catch(error => {
+          showNotification('خطأ: ' + error.message);
+        });
+    }
+
+    function showUserProfile(userId, userName, userPhoto) {
+      const modal = document.getElementById('userProfileModal');
+      const nameElement = document.getElementById('userProfileName');
+      const avatarElement = document.getElementById('userProfileAvatar');
+      const postsContainer = document.getElementById('userProfilePosts');
+
+      nameElement.textContent = userName;
+      avatarElement.src = userPhoto || 'default-avatar.jpg';
+      postsContainer.innerHTML = '';
+
+      const posts = JSON.parse(localStorage.getItem('posts')) || [];
+      const userPosts = posts.filter(post => post.userId === userId);
+
+      userPosts.forEach(post => {
+        const postDiv = createPostElement(post);
+        postsContainer.appendChild(postDiv);
       });
+
+      modal.style.display = 'flex';
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -700,6 +742,7 @@
       const userName = document.createElement('span');
       userName.classList.add('post-user');
       userName.textContent = post.userName;
+      userName.onclick = () => showUserProfile(post.userId, post.userName, post.userPhoto);
       header.appendChild(avatar);
       header.appendChild(userName);
 
@@ -919,8 +962,10 @@
     document.addEventListener('click', (e) => {
       const settingsModal = document.getElementById('settingsModal');
       const profileModal = document.getElementById('profileModal');
+      const userProfileModal = document.getElementById('userProfileModal');
       if (e.target === settingsModal) settingsModal.style.display = 'none';
       if (e.target === profileModal) profileModal.style.display = 'none';
+      if (e.target === userProfileModal) userProfileModal.style.display = 'none';
     });
   </script>
 </body>
