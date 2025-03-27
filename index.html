@@ -78,6 +78,21 @@
       box-shadow: 0 0 15px rgba(107, 72, 255, 0.5);
       outline: none;
     }
+    .auth-box .password-container {
+      position: relative;
+      width: 100%;
+    }
+    .auth-box .password-toggle {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6b48ff;
+      cursor: pointer;
+      font-size: 16px;
+    }
     .auth-box button {
       background: linear-gradient(45deg, #6b48ff, #ff589e);
       color: #fff;
@@ -232,10 +247,10 @@
       flex-grow: 1;
     }
     .post {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
       transition: all 0.4s ease;
     }
@@ -270,76 +285,84 @@
       color: #1a1a1a;
     }
     .post .time {
-      color: #bbb;
+      color: #65676b;
       font-size: 12px;
       margin-top: 10px;
     }
     .post-actions {
-      margin-top: 15px;
+      margin-top: 10px;
       display: flex;
-      gap: 20px;
-      align-items: center;
+      justify-content: space-around;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 10px;
     }
     .post-actions button {
       background: none;
       border: none;
-      color: #6b48ff;
+      color: #65676b;
       cursor: pointer;
-      font-size: 20px;
-      padding: 5px;
+      font-size: 14px;
+      padding: 5px 10px;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     .post-actions button:hover {
       color: #ff589e;
-      transform: scale(1.2);
+    }
+    .post-actions button.liked {
+      color: #ff589e;
     }
     .likes-count {
-      color: #888;
+      color: #65676b;
       font-size: 14px;
-      padding: 5px 0;
+      margin-top: 5px;
     }
     .comment-section {
-      margin-top: 15px;
+      margin-top: 10px;
     }
     .comment-input {
       width: 100%;
-      padding: 10px 20px;
-      border: none;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
       border-radius: 20px;
       font-size: 14px;
-      background: rgba(245, 245, 245, 0.9);
-      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: #f0f2f5;
       transition: all 0.3s ease;
     }
     .comment-input:focus {
       background: #fff;
-      box-shadow: 0 0 15px rgba(107, 72, 255, 0.3);
+      box-shadow: 0 0 5px rgba(107, 72, 255, 0.3);
       outline: none;
     }
     .comments-list {
-      margin-top: 15px;
+      margin-top: 10px;
     }
     .comment {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
       font-size: 14px;
       color: #1a1a1a;
       margin: 10px 0;
-      padding: 10px 15px;
-      background: rgba(245, 245, 245, 0.9);
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      padding: 10px;
+      background: #f0f2f5;
+      border-radius: 15px;
+      transition: all 0.3s ease;
     }
     .comment:hover {
-      transform: translateX(5px);
+      background: #e4e6eb;
     }
     .comment-avatar {
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       object-fit: cover;
+    }
+    .comment-text {
+      background: none;
+      padding: 0;
     }
     .notification {
       position: fixed;
@@ -485,7 +508,8 @@
         font-size: 10px;
       }
       .post-actions button {
-        font-size: 18px;
+        font-size: 12px;
+        padding: 5px;
       }
       .comment-input {
         padding: 8px 15px;
@@ -496,8 +520,8 @@
         padding: 8px 10px;
       }
       .comment-avatar {
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
       }
       .notification {
         bottom: 10px;
@@ -529,7 +553,10 @@
       <div id="loginBox">
         <h2>تسجيل الدخول</h2>
         <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required>
-        <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+        <div class="password-container">
+          <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+          <button class="password-toggle" onclick="togglePassword('loginPassword')"><i class="fas fa-eye"></i></button>
+        </div>
         <button onclick="login()">تسجيل الدخول</button>
         <p>ليس لديك حساب؟ <a href="#" onclick="showSignup()">أنشئ حسابًا</a></p>
       </div>
@@ -538,7 +565,10 @@
         <input type="text" id="signupName" placeholder="الاسم" required>
         <input type="date" id="signupBirthdate" required>
         <input type="email" id="signupEmail" placeholder="البريد الإلكتروني" required>
-        <input type="password" id="signupPassword" placeholder="كلمة المرور" required>
+        <div class="password-container">
+          <input type="password" id="signupPassword" placeholder="كلمة المرور" required>
+          <button class="password-toggle" onclick="togglePassword('signupPassword')"><i class="fas fa-eye"></i></button>
+        </div>
         <button onclick="signup()">إنشاء الحساب</button>
         <p>لديك حساب؟ <a href="#" onclick="showLogin()">تسجيل الدخول</a></p>
       </div>
@@ -588,6 +618,7 @@
       <h2>الملف الشخصي</h2>
       <img src="default-avatar.jpg" id="profileAvatar">
       <input type="file" id="avatarInput" accept="image/*" onchange="previewAvatar()">
+      <input type="text" id="avatarUrlInput" placeholder="أو أدخل رابط الصورة" onchange="setAvatarFromUrl()">
       <input type="text" id="profileName" placeholder="الاسم">
       <button onclick="updateProfile()">حفظ التغييرات</button>
     </div>
@@ -736,6 +767,7 @@
       document.getElementById('profileModal').style.display = 'flex';
       document.getElementById('profileName').value = currentUser.displayName || '';
       document.getElementById('profileAvatar').src = currentUser.photoURL || 'default-avatar.jpg';
+      document.getElementById('avatarUrlInput').value = '';
       document.getElementById('sideMenu').classList.remove('active');
     }
 
@@ -775,8 +807,17 @@
       }
     }
 
+    function setAvatarFromUrl() {
+      const url = document.getElementById('avatarUrlInput').value.trim();
+      if (url) {
+        document.getElementById('profileAvatar').src = url;
+        selectedAvatarFile = null; // Clear file selection if URL is used
+      }
+    }
+
     async function updateProfile() {
       const newName = document.getElementById('profileName').value.trim();
+      const avatarUrl = document.getElementById('avatarUrlInput').value.trim();
       let photoURL = currentUser.photoURL;
 
       try {
@@ -790,6 +831,11 @@
           const storageRef = storage.ref(`avatars/${currentUser.uid}`);
           await storageRef.put(selectedAvatarFile);
           photoURL = await storageRef.getDownloadURL();
+        } else if (avatarUrl) {
+          photoURL = avatarUrl;
+        }
+
+        if (photoURL && photoURL !== currentUser.photoURL) {
           await currentUser.updateProfile({ photoURL: photoURL });
           currentUser.photoURL = photoURL;
           document.getElementById('headerAvatar').src = photoURL;
@@ -879,23 +925,37 @@
       actionsDiv.classList.add('post-actions');
 
       const likeButton = document.createElement('button');
-      likeButton.innerHTML = post.likes > 0 ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+      post.likedBy = post.likedBy || [];
+      const isLiked = post.likedBy.includes(currentUser?.uid);
+      likeButton.innerHTML = isLiked ? '<i class="fas fa-heart"></i> إعجاب' : '<i class="far fa-heart"></i> إعجاب';
+      if (isLiked) likeButton.classList.add('liked');
       const likesCount = document.createElement('span');
       likesCount.classList.add('likes-count');
-      likesCount.textContent = ` (${post.likes || 0})`;
+      likesCount.textContent = `${post.likes || 0} إعجابات`;
       likeButton.onclick = () => {
-        post.likes = (post.likes || 0) + 1;
-        likesCount.textContent = ` (${post.likes})`;
-        likeButton.innerHTML = '<i class="fas fa-heart"></i>';
+        if (!currentUser) return;
+        if (isLiked) {
+          post.likes = (post.likes || 0) - 1;
+          post.likedBy = post.likedBy.filter(uid => uid !== currentUser.uid);
+          likeButton.innerHTML = '<i class="far fa-heart"></i> إعجاب';
+          likeButton.classList.remove('liked');
+          showNotification('تم إزالة الإعجاب');
+        } else {
+          post.likes = (post.likes || 0) + 1;
+          post.likedBy.push(currentUser.uid);
+          likeButton.innerHTML = '<i class="fas fa-heart"></i> إعجاب';
+          likeButton.classList.add('liked');
+          showNotification('تم الإعجاب بالمنشور');
+        }
+        likesCount.textContent = `${post.likes} إعجابات`;
         updateLocalStorage();
-        showNotification('تم الإعجاب بالمنشور');
       };
 
       const commentButton = document.createElement('button');
-      commentButton.innerHTML = '<i class="far fa-comment"></i>';
+      commentButton.innerHTML = '<i class="far fa-comment"></i> تعليق';
 
       const shareButton = document.createElement('button');
-      shareButton.innerHTML = '<i class="far fa-paper-plane"></i>';
+      shareButton.innerHTML = '<i class="far fa-share-square"></i> مشاركة';
       shareButton.onclick = () => {
         const sharedPost = {
           text: `تمت المشاركة: ${post.text}`,
@@ -904,7 +964,8 @@
           comments: [],
           userId: currentUser.uid,
           userName: currentUser.displayName,
-          userPhoto: currentUser.photoURL
+          userPhoto: currentUser.photoURL,
+          likedBy: []
         };
         const postsContainer = document.getElementById('postsContainer');
         const newPostDiv = createPostElement(sharedPost);
@@ -917,7 +978,7 @@
 
       if (post.userId === currentUser?.uid) {
         const editButton = document.createElement('button');
-        editButton.innerHTML = '<i class="fas fa-edit"></i>';
+        editButton.innerHTML = '<i class="fas fa-edit"></i> تعديل';
         editButton.onclick = () => {
           const newText = prompt('عدّل المنشور:', post.text);
           if (newText && newText.trim()) {
@@ -929,7 +990,7 @@
         };
 
         const deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="far fa-trash-alt"></i>';
+        deleteButton.innerHTML = '<i class="far fa-trash-alt"></i> حذف';
         deleteButton.onclick = () => {
           if (confirm('هل تريد حذف هذا المنشور؟')) {
             postDiv.remove();
@@ -943,7 +1004,6 @@
       }
 
       actionsDiv.appendChild(likeButton);
-      actionsDiv.appendChild(likesCount);
       actionsDiv.appendChild(commentButton);
       actionsDiv.appendChild(shareButton);
 
@@ -964,6 +1024,7 @@
           commentAvatar.classList.add('comment-avatar');
           commentAvatar.src = comment.userPhoto || 'default-avatar.jpg';
           const commentText = document.createElement('span');
+          commentText.classList.add('comment-text');
           commentText.textContent = `${comment.userName}: ${comment.text}`;
           commentDiv.appendChild(commentAvatar);
           commentDiv.appendChild(commentText);
@@ -980,6 +1041,7 @@
           commentAvatar.classList.add('comment-avatar');
           commentAvatar.src = currentUser.photoURL || 'default-avatar.jpg';
           const commentTextSpan = document.createElement('span');
+          commentTextSpan.classList.add('comment-text');
           commentTextSpan.textContent = `${currentUser.displayName}: ${commentText}`;
           commentDiv.appendChild(commentAvatar);
           commentDiv.appendChild(commentTextSpan);
@@ -996,6 +1058,7 @@
         }
       };
 
+      commentSection.appendChild(likesCount);
       commentSection.appendChild(commentInput);
       commentSection.appendChild(commentsList);
 
@@ -1024,7 +1087,8 @@
         comments: [],
         userId: currentUser.uid,
         userName: currentUser.displayName,
-        userPhoto: currentUser.photoURL
+        userPhoto: currentUser.photoURL,
+        likedBy: []
       };
 
       const postsContainer = document.getElementById('postsContainer');
@@ -1048,14 +1112,16 @@
         const time = postDiv.querySelector('.time').textContent;
         const likes = parseInt(postDiv.querySelector('.likes-count').textContent.match(/\d+/)?.[0] || 0);
         const comments = Array.from(postDiv.querySelectorAll('.comment')).map(c => {
-          const [userName, ...textParts] = c.querySelector('span').textContent.split(': ');
+          const [userName, ...textParts] = c.querySelector('.comment-text').textContent.split(': ');
           return {
             userName,
             text: textParts.join(': '),
             userPhoto: c.querySelector('.comment-avatar').src
           };
         });
-        posts.push({ text, time, likes, comments, userId: currentUser.uid, userName, userPhoto });
+        const likedBy = postDiv.querySelector('.post-actions button.liked') ? 
+          JSON.parse(localStorage.getItem('posts')).find(p => p.text === text && p.time === time)?.likedBy || [] : [];
+        posts.push({ text, time, likes, comments, userId: currentUser.uid, userName, userPhoto, likedBy });
       });
       localStorage.setItem('posts', JSON.stringify(posts));
     }
@@ -1072,6 +1138,18 @@
       setTimeout(() => {
         notification.style.display = 'none';
       }, 3000);
+    }
+
+    function togglePassword(inputId) {
+      const input = document.getElementById(inputId);
+      const toggle = input.nextElementSibling;
+      if (input.type === 'password') {
+        input.type = 'text';
+        toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+      } else {
+        input.type = 'password';
+        toggle.innerHTML = '<i class="fas fa-eye"></i>';
+      }
     }
 
     document.getElementById('postInput').addEventListener('keypress', function (e) {
@@ -1091,4 +1169,4 @@
     });
   </script>
 </body>
-</html>v
+</html>
