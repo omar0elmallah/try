@@ -36,121 +36,116 @@
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
+      background: #f0f2f5;
     }
     .auth-box {
-      background: rgba(255, 255, 255, 0.9);
+      background: #fff;
       padding: 40px;
-      border-radius: 25px;
-      box-shadow: 0 15px 50px rgba(107, 72, 255, 0.4), 0 0 80px rgba(255, 88, 158, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
-      max-width: 450px;
+      max-width: 400px;
       text-align: center;
       transition: transform 0.3s ease;
     }
     .auth-box:hover {
-      transform: translateY(-10px);
+      transform: translateY(-5px);
     }
     .auth-box h1 {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 800;
-      color: #6b48ff;
-      text-shadow: 0 0 10px rgba(107, 72, 255, 0.5);
+      color: #1877f2;
       margin-bottom: 20px;
     }
     .auth-box h2 {
-      font-size: 24px;
+      font-size: 20px;
       color: #1a1a1a;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
     .auth-box input {
       width: 100%;
-      padding: 15px;
-      margin: 12px 0;
-      border: none;
-      border-radius: 12px;
-      background: rgba(245, 245, 245, 0.9);
-      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
       font-size: 16px;
-      transition: all 0.3s ease;
+      background: #fff;
+      transition: border-color 0.3s ease;
     }
     .auth-box input:focus {
-      background: #fff;
-      box-shadow: 0 0 15px rgba(107, 72, 255, 0.5);
+      border-color: #1877f2;
       outline: none;
     }
     .auth-box .password-container {
       position: relative;
       width: 100%;
+      margin: 10px 0;
     }
     .auth-box .password-toggle {
       position: absolute;
-      left: 15px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: #6b48ff;
+      color: #65676b;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
+      padding: 0;
     }
     .auth-box button {
-      background: linear-gradient(45deg, #6b48ff, #ff589e);
+      background: #1877f2;
       color: #fff;
       border: none;
-      padding: 15px;
+      padding: 12px;
       width: 100%;
-      border-radius: 35px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
-      margin-top: 20px;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 15px rgba(107, 72, 255, 0.6);
+      margin-top: 15px;
+      transition: background 0.3s ease;
     }
     .auth-box button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 88, 158, 0.8);
+      background: #165eab;
     }
     .auth-box p {
-      margin-top: 20px;
-      color: #666;
+      margin-top: 15px;
+      color: #65676b;
       font-size: 14px;
     }
     .auth-box a {
-      color: #6b48ff;
+      color: #1877f2;
       text-decoration: none;
       font-weight: 600;
     }
     .auth-box a:hover {
-      color: #ff589e;
       text-decoration: underline;
     }
     header {
-      background: linear-gradient(45deg, #6b48ff, #ff589e, #ffcc00, #00ddeb);
-      color: #fff;
-      padding: 15px 20px;
+      background: #fff;
+      color: #1a1a1a;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: fixed;
       width: 100%;
       top: 0;
-      box-shadow: 0 8px 25px rgba(107, 72, 255, 0.5);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      backdrop-filter: blur(10px);
     }
     header h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 800;
-      letter-spacing: 2px;
-      text-shadow: 0 0 15px rgba(255, 88, 158, 0.8);
+      color: #1877f2;
     }
     .hamburger {
-      font-size: 24px;
+      font-size: 20px;
       background: none;
       border: none;
-      color: #fff;
+      color: #65676b;
       cursor: pointer;
       position: relative;
       z-index: 1001;
@@ -161,8 +156,8 @@
       right: -250px;
       width: 250px;
       height: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+      background: #fff;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
       transition: right 0.3s ease;
       z-index: 999;
       padding-top: 60px;
@@ -171,91 +166,80 @@
       right: 0;
     }
     .menu-item {
-      padding: 20px;
-      color: #6b48ff;
-      font-size: 18px;
-      border-bottom: 1px solid rgba(107, 72, 255, 0.1);
+      padding: 15px 20px;
+      color: #1877f2;
+      font-size: 16px;
+      border-bottom: 1px solid #e0e0e0;
       cursor: pointer;
     }
     .menu-item:hover {
-      background: rgba(107, 72, 255, 0.1);
+      background: #f0f2f5;
     }
     .user-info {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 8px 15px;
-      border-radius: 30px;
+      padding: 5px 10px;
+      border-radius: 20px;
     }
     .user-avatar {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       object-fit: cover;
     }
     .post-form {
-      margin-top: 80px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 15px;
-      box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
-      max-width: 700px;
+      margin-top: 70px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-      transition: transform 0.4s ease;
-    }
-    .post-form:hover {
-      transform: translateY(-10px);
     }
     .post-form textarea {
       width: 100%;
-      height: 120px;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
+      height: 100px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
       resize: none;
-      font-size: 16px;
-      background: rgba(245, 245, 245, 0.9);
-      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      font-size: 14px;
+      background: #f0f2f5;
+      transition: border-color 0.3s ease;
     }
     .post-form textarea:focus {
-      background: #fff;
-      box-shadow: 0 0 20px rgba(107, 72, 255, 0.3);
+      border-color: #1877f2;
       outline: none;
     }
     .post-form button {
-      background: linear-gradient(45deg, #6b48ff, #ff589e);
+      background: #1877f2;
       color: #fff;
       border: none;
-      padding: 12px 30px;
-      border-radius: 25px;
+      padding: 10px 20px;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 15px;
-      font-size: 16px;
+      margin-top: 10px;
+      font-size: 14px;
       font-weight: 600;
-      transition: all 0.4s ease;
+      transition: background 0.3s ease;
     }
     .post-form button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px rgba(255, 88, 158, 0.8);
+      background: #165eab;
     }
     .posts {
-      max-width: 700px;
-      margin: 40px auto;
+      max-width: 600px;
+      margin: 20px auto;
       flex-grow: 1;
+      padding: 0 10px;
     }
     .post {
       background: #fff;
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      transition: all 0.4s ease;
-    }
-    .post:hover {
-      transform: translateY(-5px);
+      margin-bottom: 15px;
     }
     .post-header {
       display: flex;
@@ -275,19 +259,19 @@
       cursor: pointer;
     }
     .post-user:hover {
-      color: #6b48ff;
+      color: #1877f2;
       text-decoration: underline;
     }
     .post p {
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.6;
       color: #1a1a1a;
     }
     .post .time {
       color: #65676b;
       font-size: 12px;
-      margin-top: 10px;
+      margin-top: 5px;
     }
     .post-actions {
       margin-top: 10px;
@@ -309,14 +293,14 @@
       gap: 5px;
     }
     .post-actions button:hover {
-      color: #ff589e;
+      color: #1877f2;
     }
     .post-actions button.liked {
-      color: #ff589e;
+      color: #1877f2;
     }
     .likes-count {
       color: #65676b;
-      font-size: 14px;
+      font-size: 12px;
       margin-top: 5px;
     }
     .comment-section {
@@ -325,15 +309,15 @@
     .comment-input {
       width: 100%;
       padding: 10px 15px;
-      border: 1px solid #ddd;
+      border: none;
       border-radius: 20px;
       font-size: 14px;
       background: #f0f2f5;
-      transition: all 0.3s ease;
+      transition: background 0.3s ease;
     }
     .comment-input:focus {
       background: #fff;
-      box-shadow: 0 0 5px rgba(107, 72, 255, 0.3);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       outline: none;
     }
     .comments-list {
@@ -345,11 +329,10 @@
       gap: 10px;
       font-size: 14px;
       color: #1a1a1a;
-      margin: 10px 0;
-      padding: 10px;
+      margin: 5px 0;
+      padding: 8px 12px;
       background: #f0f2f5;
       border-radius: 15px;
-      transition: all 0.3s ease;
     }
     .comment:hover {
       background: #e4e6eb;
@@ -368,14 +351,14 @@
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background: linear-gradient(45deg, #6b48ff, #ff589e);
+      background: #1877f2;
       color: #fff;
-      padding: 15px 30px;
-      border-radius: 30px;
+      padding: 10px 20px;
+      border-radius: 20px;
       display: none;
       z-index: 1000;
-      box-shadow: 0 8px 30px rgba(107, 72, 255, 0.6);
-      font-size: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      font-size: 14px;
       animation: fadeIn 0.4s ease;
     }
     @keyframes fadeIn {
@@ -395,31 +378,31 @@
       z-index: 1001;
     }
     .settings-box, .profile-box {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 15px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
       width: 90%;
-      max-width: 500px;
-      box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
+      max-width: 400px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
     .settings-box h2, .profile-box h2 {
-      color: #6b48ff;
-      margin-bottom: 20px;
+      color: #1877f2;
+      margin-bottom: 15px;
     }
     .settings-box select, .profile-box input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 10px;
-      background: rgba(245, 245, 245, 0.9);
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
     }
     .profile-box img {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      margin: 15px auto;
+      margin: 10px auto;
       display: block;
     }
     .user-profile-container {
@@ -443,15 +426,15 @@
       object-fit: cover;
       margin-bottom: 15px;
       border: 4px solid #fff;
-      box-shadow: 0 0 10px rgba(107, 72, 255, 0.3);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .user-profile-header h2 {
-      font-size: 28px;
+      font-size: 24px;
       color: #1a1a1a;
       margin: 0;
     }
     .user-profile-posts {
-      max-width: 700px;
+      max-width: 600px;
       margin: 20px auto;
       padding: 0 10px;
     }
@@ -461,48 +444,48 @@
         padding: 10px 15px;
       }
       header h1 {
-        font-size: 24px;
-      }
-      .hamburger {
         font-size: 20px;
       }
+      .hamburger {
+        font-size: 18px;
+      }
       .user-info {
-        padding: 5px 10px;
+        padding: 5px 8px;
       }
       .user-avatar {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
       }
       .post-form {
-        margin-top: 70px;
-        padding: 15px;
+        margin-top: 60px;
+        padding: 10px;
         max-width: 100%;
       }
       .post-form textarea {
-        height: 100px;
-        font-size: 14px;
+        height: 80px;
+        font-size: 12px;
       }
       .post-form button {
-        padding: 10px 20px;
-        font-size: 14px;
+        padding: 8px 15px;
+        font-size: 12px;
       }
       .posts {
-        margin: 20px 10px;
+        margin: 15px 5px;
         max-width: 100%;
       }
       .post {
-        padding: 15px;
-        margin-bottom: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
       }
       .post-avatar {
         width: 35px;
         height: 35px;
       }
       .post-user {
-        font-size: 14px;
+        font-size: 12px;
       }
       .post p {
-        font-size: 14px;
+        font-size: 12px;
       }
       .post .time {
         font-size: 10px;
@@ -512,12 +495,12 @@
         padding: 5px;
       }
       .comment-input {
-        padding: 8px 15px;
+        padding: 8px 10px;
         font-size: 12px;
       }
       .comment {
         font-size: 12px;
-        padding: 8px 10px;
+        padding: 6px 8px;
       }
       .comment-avatar {
         width: 25px;
@@ -526,11 +509,11 @@
       .notification {
         bottom: 10px;
         left: 10px;
-        padding: 10px 20px;
-        font-size: 14px;
+        padding: 8px 15px;
+        font-size: 12px;
       }
       .settings-box, .profile-box {
-        padding: 20px;
+        padding: 15px;
         max-width: 90%;
       }
       .user-profile-header img {
@@ -538,7 +521,7 @@
         height: 100px;
       }
       .user-profile-header h2 {
-        font-size: 22px;
+        font-size: 20px;
       }
       .user-profile-posts {
         margin: 15px 5px;
@@ -840,12 +823,20 @@
           currentUser.photoURL = photoURL;
           document.getElementById('headerAvatar').src = photoURL;
           document.getElementById('profileAvatar').src = photoURL;
+          // Update all posts with the new avatar
+          const posts = JSON.parse(localStorage.getItem('posts')) || [];
+          posts.forEach(post => {
+            if (post.userId === currentUser.uid) {
+              post.userPhoto = photoURL;
+            }
+          });
+          localStorage.setItem('posts', JSON.stringify(posts));
+          loadPosts(); // Reload posts to reflect the new avatar
         }
 
         document.getElementById('profileModal').style.display = 'none';
         showNotification('تم تحديث الملف الشخصي بنجاح');
         selectedAvatarFile = null;
-        loadPosts();
       } catch (error) {
         showNotification('خطأ: ' + error.message);
       }
@@ -951,9 +942,6 @@
         updateLocalStorage();
       };
 
-      const commentButton = document.createElement('button');
-      commentButton.innerHTML = '<i class="far fa-comment"></i> تعليق';
-
       const shareButton = document.createElement('button');
       shareButton.innerHTML = '<i class="far fa-share-square"></i> مشاركة';
       shareButton.onclick = () => {
@@ -1004,7 +992,6 @@
       }
 
       actionsDiv.appendChild(likeButton);
-      actionsDiv.appendChild(commentButton);
       actionsDiv.appendChild(shareButton);
 
       const commentSection = document.createElement('div');
