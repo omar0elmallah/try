@@ -20,6 +20,9 @@
       animation: gradientBG 15s ease infinite;
       direction: rtl;
       overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
@@ -134,20 +137,23 @@
       border: none;
       color: #fff;
       cursor: pointer;
+      position: relative;
+      z-index: 1001;
     }
     .menu {
       position: fixed;
-      top: 70px;
-      left: -250px;
+      top: 0;
+      right: -250px;
       width: 250px;
       height: 100%;
       background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 10px 40px rgba(107, 72, 255, 0.3);
-      transition: left 0.3s ease;
+      transition: right 0.3s ease;
       z-index: 999;
+      padding-top: 70px;
     }
     .menu.active {
-      left: 0;
+      right: 0;
     }
     .menu-item {
       padding: 20px;
@@ -223,6 +229,7 @@
     .posts {
       max-width: 800px;
       margin: 50px auto;
+      flex-grow: 1;
     }
     .post {
       background: rgba(255, 255, 255, 0.95);
@@ -453,7 +460,7 @@
     <div class="profile-box">
       <h2>الملف الشخصي</h2>
       <img src="default-avatar.jpg" id="profileAvatar">
-      <input type="file" id="avatarInput" accept="image/*" onchange="uploadAvatar()">
+      <input type="file" id="avatarInput" accept="image/*" onchange="previewAvatar()">
       <input type="text" id="profileName" placeholder="الاسم">
       <button onclick="updateProfile()">حفظ التغييرات</button>
     </div>
@@ -481,6 +488,7 @@
     const auth = firebase.auth();
     const storage = firebase.storage();
     let currentUser = null;
+    let selectedAvatarFile = null;
 
     function login() {
       const email = document.getElementById('loginEmail').value;
@@ -609,32 +617,52 @@
       localStorage.setItem('darkMode', mode);
     }
 
-    function uploadAvatar() {
+    function previewAvatar() {
       const file = document.getElementById('avatarInput').files[0];
       if (file) {
-        const storageRef = storage.ref(`avatars/${currentUser.uid}`);
-        storageRef.put(file).then(() => {
-          storageRef.getDownloadURL().then(url => {
-            currentUser.updateProfile({ photoURL: url }).then(() => {
-              document.getElementById('profileAvatar').src = url;
-              document.getElementById('headerAvatar').src = url;
-              showNotification('تم تحديث الصورة');
-            });
-          });
-        });
+        selectedAvatarFile = file;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profileAvatar').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
       }
     }
 
     function updateProfile() {
       const newName = document.getElementById('profileName').value.trim();
+      const promises = [];
+      
       if (newName) {
-        currentUser.updateProfile({ displayName: newName }).then(() => {
-          document.getElementById('userName').textContent = `مرحبًا، ${newName}`;
-          document.getElementById('profileModal').style.display = 'none';
-          showNotification('تم تحديث الملف الشخصي');
-          loadPosts();
-        });
+        promises.push(currentUser.updateProfile({ displayName: newName }));
       }
+      
+      if (selectedAvatarFile) {
+        const storageRef = storage.ref(`avatars/${currentUser.uid}`);
+        promises.push(storageRef.put(selectedAvatarFile).then(() => {
+          return storageRef.getDownloadURL().then(url => {
+            return currentUser.updateProfile({ photoURL: url });
+          });
+        }));
+      }
+
+      Promise.all(promises).then(() => {
+        if (newName) {
+          document.getElementById('userName').textContent = `مرحبًا، ${newName}`;
+        }
+        if (selectedAvatarFile) {
+          storage.ref(`avatars/${currentUser.uid}`).getDownloadURL().then(url => {
+            document.getElementById('headerAvatar').src = url;
+            document.getElementById('profileAvatar').src = url;
+          });
+        }
+        document.getElementById('profileModal').style.display = 'none';
+        showNotification('تم تحديث الملف الشخصي');
+        selectedAvatarFile = null;
+        loadPosts();
+      }).catch(error => {
+        showNotification('خطأ: ' + error.message);
+      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
